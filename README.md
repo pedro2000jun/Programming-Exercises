@@ -1,2 +1,2 @@
-# Programming-Exercises
-Repositório criado para conter soluções de simples problemas de computação;
+# Programming Exercises
+Repositório criado para conter soluções de simples problemas de computação.
