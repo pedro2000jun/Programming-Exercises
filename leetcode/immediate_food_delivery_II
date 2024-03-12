@@ -1,0 +1,3 @@
+# Write your MySQL query statement below
+
+select round(avg(f.veri)*100, 2) as immediate_percentage  from (select distinct customer_id, (case when (select customer_pref_delivery_date from delivery d2 where d1.customer_id = d2.customer_id and min(d1.order_date) = d2.order_date) =  min(order_date) then 1 else 0 end) as veri  from delivery d1 group by customer_id) as f;

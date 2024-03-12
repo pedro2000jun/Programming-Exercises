@@ -1,0 +1,3 @@
+# Write your MySQL query statement below
+
+select left(t.trans_date,7) as month, t.country, count(t.id)  as trans_count, sum(case when t.state <> 'declined' then 1 else 0 end) as approved_count, sum(t.amount) as trans_total_amount, sum(case when t.state <> 'declined' then t.amount else 0 end) as approved_total_amount   from transactions t group by t.country, left(t.trans_date,7); 
