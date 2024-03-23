@@ -1,0 +1,12 @@
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        ret = ""
+        for j in range (0, len(strs[0])):
+            for i in range (1, len(strs)):
+                try:
+                    if strs[0][j] != strs[i][j]:
+                        return ret 
+                except:
+                    return ret
+            ret = ret + strs[0][j]
+        return ret
