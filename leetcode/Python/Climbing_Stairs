@@ -1,0 +1,17 @@
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n == 1:
+            return 1
+        elif n == 2:
+            return 2
+        elif n == 3:
+            return 3    
+        else:
+            aux1 = [1, 1]
+            aux2 = [0, 1]
+            for i in range(4, n+1):
+                aux1[0] = aux1[0] + aux2[0]
+                aux1[1] = aux1[1] + aux2[1]
+                aux2[0] = aux1[0] - aux2[0]
+                aux2[1] = aux1[1] - aux2[1]
+        return aux1[0]*1+aux1[1]*2
