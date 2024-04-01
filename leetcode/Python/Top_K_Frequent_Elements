@@ -1,0 +1,27 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        hash_t = {}
+        bucket = []
+
+        for i in range(len(nums)):
+            bucket.append([])
+            try:
+                hash_t[nums[i]] += 1
+            except:
+                hash_t[nums[i]] = 1
+        
+        ret = []
+        for j in hash_t:
+            bucket[hash_t[j]-1].append(j)
+        
+        i = len(nums) -1
+
+        while len(ret) < k:
+            if len(bucket[i]) != 0:
+                ret += bucket[i]
+            i -=1
+         
+
+        return ret
+
+
