@@ -1,0 +1,39 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        lines = []
+        cols = []
+
+        for _ in range(9):
+            lines.append([])
+            cols.append([])
+
+        sqrs = {}
+        index = 0
+
+        valid_char = ["1","2","3","4","5","6","7","8","9"]
+
+        for i in range (0, 9):
+            for j in range (0, 9):
+
+                if board[i][j] != ".":
+                    if not board[i][j] in valid_char:
+                        return False
+                    elif board[i][j] in lines[i]:
+                        return False
+                    elif board[i][j] in cols[j]:
+                        return False
+                    
+                    lines[i].append(board[i][j])
+                    cols[j].append(board[i][j])
+
+                    
+                    try:
+                        if board[i][j] in sqrs[str(i//3)+str(j//3)]:
+                            return False
+                        sqrs[str(i//3)+str(j//3)] += board[i][j]
+                    except:
+                        sqrs[str(i//3)+str(j//3)] = ""+board[i][j]
+
+
+        return True
+
