@@ -1,0 +1,24 @@
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        anagrams_hash = []
+        ret = []
+
+        for i in range(len(strs)):
+            aux_hash = {}
+
+            for j in range(len(strs[i])):
+                try:
+                    aux_hash[strs[i][j]] += 1
+                except:
+                    aux_hash[strs[i][j]] = 1
+            
+            new = 1
+            for k in range(len(anagrams_hash)):
+                if aux_hash == anagrams_hash[k][0]:
+                    new = 0
+                    ret[anagrams_hash[k][1]].append(strs[i])
+            if new == 1:
+                anagrams_hash.append([aux_hash, len(ret)])
+                ret.append([strs[i]])
+
+        return ret

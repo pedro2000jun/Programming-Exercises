@@ -1,0 +1,15 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        vet = []
+        def solution(n, comb, left, right, vet):
+            if left == n and right == n:
+                vet.append(comb)
+                return
+            if left < n:
+                solution(n, comb+"(", left+1, right, vet)
+            if right < left:
+                solution(n, comb+")", left, right+1, vet)
+            
+        solution(n, "", 0, 0, vet)
+
+        return vet

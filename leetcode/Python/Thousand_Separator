@@ -1,0 +1,6 @@
+class Solution:
+    def thousandSeparator(self, n: int) -> str:
+        if n < 1000:
+            return str(n)
+        
+        return self.thousandSeparator(n//1000) + "." +"{:03}".format(n%1000)
