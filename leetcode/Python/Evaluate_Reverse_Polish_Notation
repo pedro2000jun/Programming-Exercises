@@ -1,0 +1,29 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        
+        pilha = []
+
+        for i in tokens:
+            if i  == '+':
+                a = pilha.pop()
+                b = pilha.pop()
+                pilha.append(int(a)+int(b))
+            elif i == '-':
+                a = pilha.pop()
+                b = pilha.pop()
+                pilha.append(int(b)-int(a))
+            elif i == '*':
+                a = pilha.pop()
+                b = pilha.pop()
+                pilha.append(int(b)*int(a))
+            elif i == '/':
+                a = pilha.pop()
+                b = pilha.pop()
+                pilha.append(int(int(b)/int(a)))
+            else:
+                pilha.append(int(i))
+
+ 
+        return pilha.pop()
+            
+        

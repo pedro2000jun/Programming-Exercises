@@ -1,0 +1,13 @@
+class Solution:
+    def checkIfPangram(self, sentence: str) -> bool:
+
+        hash_t = {}
+        for i in sentence:
+            try:
+                hash_t[i] += 1
+            except:
+                hash_t[i] = 1
+                if len(hash_t) == 26:
+                    return True
+        
+        return False
