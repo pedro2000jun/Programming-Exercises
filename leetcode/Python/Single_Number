@@ -1,0 +1,13 @@
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        hash_t = {}
+
+        for i in nums:
+            try:
+                hash_t[i] += 1
+            except:
+                hash_t[i] = 1
+        
+        for j in hash_t:
+            if hash_t[j] == 1:
+                return j
