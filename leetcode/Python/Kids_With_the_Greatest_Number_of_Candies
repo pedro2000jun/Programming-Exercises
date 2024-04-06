@@ -1,0 +1,37 @@
+class Solution:
+    def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
+        n = len(candies)
+        left = []
+        right = []
+    
+        result = []
+
+        for i in range(0, n):
+            if i == 0:
+                left.append(candies[i])
+                right.append(candies[n-1-i])
+            else:
+                left.append(max(left[-1],candies[i]))
+                right.insert(0, max(right[0],candies[n-1-i]))
+        
+        print(left)
+        print(right)
+        
+        for j in range(0, n):
+            if j == 0:
+                if extraCandies + candies[j] >= right[j+1]:
+                    result.append(True)
+                else:
+                    result.append(False)
+            elif j == n - 1:
+                if extraCandies + candies[j] >= left[j-1]:
+                    result.append(True)
+                else:
+                    result.append(False)
+            else:
+                if extraCandies + candies[j] >= max(right[j+1], left[j-1]):
+                    result.append(True)
+                else:
+                    result.append(False)
+
+        return result 

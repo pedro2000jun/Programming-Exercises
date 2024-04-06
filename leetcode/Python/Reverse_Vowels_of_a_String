@@ -1,0 +1,27 @@
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        v = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+
+        n = len(s)
+
+        s = list(s)
+
+        ini = 0
+        fim = n - 1
+
+        while ini < fim:
+            if s[ini] in v and s[fim] in v:
+                aux = s[ini]
+                s[ini] = s[fim]
+                s[fim] = aux
+                fim -= 1
+                ini += 1
+            elif s[ini] in v:
+                fim -= 1
+            elif s[fim] in v:
+                ini += 1
+            else:
+                fim -= 1
+                ini += 1
+
+        return "".join(s)

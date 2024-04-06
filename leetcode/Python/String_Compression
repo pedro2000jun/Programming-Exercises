@@ -1,0 +1,25 @@
+class Solution:
+    def compress(self, chars: List[str]) -> int:
+
+        i = 1
+        ret = chars[:]
+
+        while i < len(ret):
+            if ret[i] == ret[i - 1]:
+                count = 2
+                while i+count-1 < len(ret):
+                    if ret[i+count-1] == ret[i]:
+                        count += 1
+                    else:
+                        break
+                lis_count = list(str(count))
+                ret = ret[:i] + lis_count + ret[i+count-1:]
+                i += len(lis_count) + 1
+
+            else:
+                i += 1
+        
+        for j in range(0, len(ret)):
+            chars[j] = ret[j]
+
+        return j+1

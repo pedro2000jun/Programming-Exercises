@@ -1,0 +1,18 @@
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        
+        n = len(s)
+        ret = ""
+        word = ""
+
+        for i in range(n-1, -1, -1):
+            if s[i].isalnum():
+                word = s[i] + word
+            else:
+                if len(word) > 0:
+                    ret += " " + word
+                    word = ""
+        if len(word) > 0:
+            ret += " " + word
+        
+        return ret[1:]

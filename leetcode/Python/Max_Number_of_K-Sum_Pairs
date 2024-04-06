@@ -1,0 +1,21 @@
+class Solution:
+    def maxOperations(self, nums: List[int], k: int) -> int:
+        nums = sorted(nums)
+        count = 0
+
+        ini = 0
+        fim = len(nums)-1
+
+        while ini < fim:
+            temp = nums[ini] + nums[fim]
+
+            if temp == k:
+                count += 1
+                ini += 1
+                fim -= 1
+            elif temp < k:
+                ini += 1
+            else:
+                fim -= 1
+        
+        return count
