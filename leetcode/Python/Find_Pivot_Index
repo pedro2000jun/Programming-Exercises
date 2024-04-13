@@ -1,0 +1,31 @@
+class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+        left = []
+        right = []
+
+        n = len(nums)
+
+        if n == 1:
+            return 0
+
+        for i in range(n):
+            if i == 0:
+                left.append(nums[i])
+                right.append(nums[n-1-i])
+            else:
+                left.append(left[-1]+nums[i])
+                right.insert(0, right[0]+nums[n-1-i])
+
+
+        for j in range(0, n):
+            if j == 0: 
+                if right[j + 1] == 0:
+                    return j
+            elif j == n-1:
+                if left[j-1] == 0:
+                    return j
+                break
+            elif left[j-1] == right[j + 1]:
+                return j
+
+        return -1       

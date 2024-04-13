@@ -1,0 +1,18 @@
+class Solution:
+    def uniqueOccurrences(self, arr: List[int]) -> bool:
+        hash_t = {}
+        for i in range(0, len(arr)):
+            try:
+                hash_t[arr[i]] += 1
+            except:
+                hash_t[arr[i]] = 1
+        
+        occ = []
+
+        for j in hash_t:
+            if not hash_t[j] in occ:
+                occ.append(hash_t[j])
+            else:
+                return False
+
+        return True
