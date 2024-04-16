@@ -1,0 +1,15 @@
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        hash_t = {}
+        n = len(nums)
+        if len(nums) == 1:
+            return nums[0]
+        for i in nums:
+            try:
+                hash_t[i] += 1
+                if hash_t[i] > n/2:
+                    return i
+            except:
+                hash_t[i] = 1
+        
+        

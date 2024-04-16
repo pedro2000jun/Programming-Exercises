@@ -1,0 +1,18 @@
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        nums2 = []
+        hash_t = {}
+
+        for i in nums:
+            try:
+                hash_t[i] += 1
+                if hash_t[i] <= 2:
+                    nums2.append(i)
+            except:
+                hash_t[i] = 1
+                nums2.append(i)
+
+        for j in range(len(nums2)):
+            nums[j] = nums2[j]
+        
+        return len(nums2)
