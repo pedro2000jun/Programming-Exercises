@@ -1,0 +1,27 @@
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        def rotate_outer(m, n, c):
+            
+            if c < n//2:
+
+                for i in range(c, n-1-c):
+
+                    aux1 = m[c][i]
+                    m[c][i] = m[n-1-i][c]
+
+                    aux2 = m[i][n-1-c]
+                    m[i][n-1-c] = aux1
+
+                    aux1 = m[n-1-c][n-1-i] 
+                    m[n-1-c][n-1-i] = aux2
+
+                    m[n-1-i][c] = aux1
+                    
+                rotate_outer(m, n, c+1)
+
+
+        rotate_outer(matrix, len(matrix), 0)
+

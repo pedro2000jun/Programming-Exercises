@@ -1,0 +1,45 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        ret = []
+
+        def solution(m, vet):
+            if len(m) > 0:
+                if len(m) == 1:
+                    vet += m[0]
+                elif len(m[0]) == 1:
+                    for a in m:
+                        vet += a
+                else:
+                    vet += m[0]
+                    del m[0]
+
+                    i = 0
+
+                    while i < len(m):
+                        vet.append(m[i][-1])
+                        del m[i][-1]
+
+                        if len(m[i]) == 0:
+                            del m[i]
+                        else:
+                            i += 1
+                    
+                    vet += m[-1][::-1]
+                    del m[-1]
+
+                    j = len(m) - 1
+
+                    while j >= 0 and len(m) > 0:
+                        vet.append(m[j][0])
+                        del m[j][0]
+
+                        if len(m[j]) == 0:
+                            del m[j]
+                        j -= 1
+                    
+                    solution(m, vet)
+
+        solution(matrix, ret)
+        return ret
+
+        
