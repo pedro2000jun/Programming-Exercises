@@ -1,0 +1,62 @@
+class Solution:
+    def gameOfLife(self, board: List[List[int]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        
+        def neighbours(b, m, n, i, j):
+            num_ng = 0
+            count_1s = 0
+            
+            if i-1 >= 0:
+                if j-1 >= 0:
+                    count_1s += b[i-1][j-1]
+                    num_ng += 1
+                
+                count_1s += b[i-1][j]
+                num_ng += 1
+
+                if j+1 < n:
+                    count_1s += b[i-1][j+1]
+                    num_ng += 1
+
+            if j-1 >=0:
+                count_1s += b[i][j-1]
+                num_ng += 1
+            if j+1 < n:
+                count_1s += b[i][j+1]
+                num_ng += 1
+
+            if i+1 < m:
+                if j-1 >= 0:
+                    count_1s += b[i+1][j-1]
+                    num_ng += 1
+                count_1s += b[i+1][j]
+                num_ng += 1
+                if j+1 < n:
+                    count_1s += b[i+1][j+1]
+                    num_ng += 1
+
+            return num_ng - count_1s, count_1s
+
+
+
+        m = len(board)
+        n = len(board[0])
+
+        changes = []
+
+        for i in range(m):
+            for j in range(n):
+                n0s, n1s = neighbours(board, m, n, i, j)
+                if board[i][j] == 1:
+                    if n1s < 2:
+                        changes.append([i, j, 0])
+                    elif n1s > 3:
+                        changes.append([i, j, 0])
+                else:
+                    if n1s == 3:
+                        changes.append([i, j, 1])
+        
+        for a in changes:
+            board[a[0]][a[1]] = a[2]

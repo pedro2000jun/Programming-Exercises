@@ -1,0 +1,49 @@
+class Solution:
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        def delete_from_array(vet, num):
+            for a in range(len(vet)):
+                if vet[a] == num:
+                    del vet[a]
+                    break
+
+        def solution(board, hash_t):
+            for i in range(0, 9):
+                for j in range(0,9):
+                    if board[i][j] == ".":
+                        hash_t.append([[i, j], [1,2,3,4,5,6,7,8,9]])
+                        for k in range(0, 9):
+                            if board[i][k] != ".":
+                                delete_from_array(hash_t[-1][1], int(board[i][k]))
+                            if board[k][j] != ".":
+                                delete_from_array(hash_t[-1][1], int(board[k][j]))
+                        l = i-i%3
+                        c = j-j%3
+                        for x in range(l, l+3):
+                            for y in range(c, c+3):
+                                if board[x][y] != ".":
+                                    delete_from_array(hash_t[-1][1], int(board[x][y]))
+                        
+                        if len(hash_t[-1][1]) > 0:
+                            board[i][j] = str(hash_t[-1][1][0])
+                            del hash_t[-1][1][0]
+                            solution(board, hash_t)
+                        else:
+                            del hash_t[-1]
+                            if len(hash_t) > 0:
+                                for z in range(len(hash_t)-1, -1,-1):
+                                    if len(hash_t[z][1]) == 0:
+                                        board[hash_t[z][0][0]][hash_t[z][0][1]] = "."
+                                        del hash_t[z]
+                                    else:
+                                        board[hash_t[z][0][0]][hash_t[z][0][1]] = str(hash_t[z][1][0])
+                                        del hash_t[z][1][0]
+                                        solution(board, hash_t)
+                                        break
+        
+        hash_t = []
+        solution(board, hash_t)
+
+                            
